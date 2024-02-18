@@ -83,19 +83,30 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
+                                            <th scope="col">Serial</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                        {{-- @php $i=0; @endphp --}}
+
+                                            
+                                        
+                                        @foreach ($all_students as $key=>$item)
+                                        {{-- @php $i++; @endphp --}}
+                                              <tr>
+                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>
+                                                <a href="" class="btn btn-info">Edit</a>
+                                                <a href="" class="btn btn-danger" onclick="return confirm('Are you sure want to delete this student?')">Delete</a>
+                                            </td>
                                         </tr>
+                                        @endforeach
+                                      
 
                                     </tbody>
                                 </table>
