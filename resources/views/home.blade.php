@@ -37,83 +37,84 @@
 
 
                 @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
                 @endif
 
 
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header">
-                                Add Student
-                            </div>
-                            <div class="card-body">
-                                <form action="{{ route('store') }}" method="post">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Student Name</label>
-                                        <input type="text" class="form-control" name="name"
-                                            value="{{ old('name') }}">
-                                        @error('name')
-                                            <span class="text-danger">{{ $message }} </span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Student Email</label>
-                                        <input type="text" class="form-control" name="email"
-                                            value="{{ old('email') }}">
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }} </span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="submit" class="btn btn-primary" value="Submit">
-                                    </div>
-                                </form>
-                            </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Add Student
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('store') }}" method="post">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Student Name</label>
+                                    <input type="text" class="form-control" name="name"
+                                        value="{{ old('name') }}">
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }} </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Student Email</label>
+                                    <input type="text" class="form-control" name="email"
+                                        value="{{ old('email') }}">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }} </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <input type="submit" class="btn btn-primary" value="Submit">
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header">
-                                All Students
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Serial</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{-- @php $i=0; @endphp --}}
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            All Students
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Serial</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- @php $i=0; @endphp --}}
 
-                                            
-                                        
-                                        @foreach ($all_students as $key=>$item)
+
+
+                                    @foreach ($all_students as $key => $item)
                                         {{-- @php $i++; @endphp --}}
-                                              <tr>
+                                        <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>
-                                                <a href="{{ route('edit', $item->id) }}" class="btn btn-info" >Edit</a>
-                                                <a href="" class="btn btn-danger" onclick="return confirm('Are you sure want to delete this student?')">Delete</a>
+                                                <a href="{{ route('edit', $item->id) }}" class="btn btn-info">Edit</a>
+                                                <a href="{{ route('delete', $item->id) }}" class="btn btn-danger"
+                                                    onclick="return confirm('Are you sure want to delete this student?')">Delete</a>
                                             </td>
                                         </tr>
-                                        @endforeach
-                                      
+                                    @endforeach
 
-                                    </tbody>
-                                </table>
 
-                            </div>
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

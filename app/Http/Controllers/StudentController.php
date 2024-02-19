@@ -51,4 +51,13 @@ class StudentController extends Controller
         $student->update();
         return redirect()->route('home')->with('success', 'Data is Updated  successfully');
     }
+
+
+    public function delete($id)
+    {
+        $student = Student::where('id', $id)->first();
+        $student->delete();
+        return redirect()->back()->with('success', 'Data is Updated  successfully');
+
+    }
 }
