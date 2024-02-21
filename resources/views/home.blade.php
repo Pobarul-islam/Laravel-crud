@@ -49,8 +49,15 @@
                             Add Student
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('store') }}" method="post">
+                            <form action="{{ route('store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Student Photo</label>
+                                    <input type="file" name="photo">
+                                    @error('photo')
+                                        <span class="text-danger">{{ $message }} </span>
+                                    @enderror
+                                </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Student Name</label>
                                     <input type="text" class="form-control" name="name"
@@ -85,6 +92,7 @@
                                     <tr>
                                         <th scope="col">Serial</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Photo</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -99,6 +107,7 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->name }}</td>
+                                            <td><img src="{{ asset('uploads/'.$item->photo) }}" alt="" style="width: 200px"></td>
                                             <td>{{ $item->email }}</td>
                                             <td>
                                                 <a href="{{ route('edit', $item->id) }}" class="btn btn-info">Edit</a>

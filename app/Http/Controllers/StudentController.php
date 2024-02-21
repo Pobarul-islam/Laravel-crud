@@ -17,12 +17,22 @@ class StudentController extends Controller
     {
         $request->validate(
             [
+                'photo' => 'required|image|mimes:jpeg,png,gif,jpg|max:2048',
                 'name' => 'required',
                 'email' => 'required|email',
             ]
         );
 
+
+        $ext = $request->file('photo')->extension();
+        $final_name = date('YmdHis') . '.' . $ext;
+        // dd($final_name);
+        $request->file('photo')->move(public_path('/uploads'), $final_name);
+
+
+
         $student = new Student();
+        $student->photo = $final_name;
         $student->name = $request->name;
         $student->email = $request->email;
         $student->save();
@@ -58,6 +68,5 @@ class StudentController extends Controller
         $student = Student::where('id', $id)->first();
         $student->delete();
         return redirect()->back()->with('success', 'Data is Updated  successfully');
-
     }
 }
