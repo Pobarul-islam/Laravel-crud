@@ -57,7 +57,7 @@ class StudentController extends Controller
                 'email' => 'required|email',
             ]
         );
-        
+
 
         if ($request->hasFile('photo')) {
 
@@ -67,7 +67,10 @@ class StudentController extends Controller
 
                 ]
             );
-            unlink(public_path('uploads/' . $student->photo));
+            if (file_exists(public_path('uploads/' . $student->photo)) and !empty($student->photo)) {
+                unlink(public_path('uploads/' . $student->photo));
+
+            }
             $ext = $request->file('photo')->extension();
             $final_name = date('YmdHis') . '.' . $ext;
 
